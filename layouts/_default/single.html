@@ -23,7 +23,7 @@
     </div>
   {{ end }}
   {{ if gt (len .TableOfContents) 32 }}
-    <div id="toc">
+    <div id="toc" class="mobile-hidden">
       <h3>目录</h3>
       {{ .TableOfContents }}
     </div>

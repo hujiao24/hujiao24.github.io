@@ -9,7 +9,7 @@ slug: wrangler
 cover: /archives/wrangler/aiqage.png
 tags:
 - wrangler
-title: 使用wrangler发布cf的workers项目
+title: 使用wrangler发布workers项目
 ---
 
 ## 前言

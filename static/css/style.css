@@ -32,6 +32,8 @@
 
 html {
   overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -46,6 +48,8 @@ body {
   background-size: cover;
   background-color: var(--background-light);
   transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 header {
@@ -188,6 +192,8 @@ main {
   margin: 10px auto 0 auto;
   padding: 85px 1em 60px 1em;
   flex: 1;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 footer {
@@ -406,6 +412,8 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .index-card {
@@ -538,6 +546,8 @@ footer a:hover {
   display: flex;
   flex-direction: column;
   gap: 0.3em;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .post-list li {
@@ -585,6 +595,9 @@ footer a:hover {
 /* single.html 样式 */
 .container {
   max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .single-title {
@@ -611,6 +624,8 @@ pre {
   line-height: 1.5;
   border: 1px solid var(--border-color);
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 code {
@@ -632,6 +647,8 @@ code {
   max-width: 100%;
   color: var(--text-color);
   transition: color 0.3s ease;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .content img {
@@ -680,7 +697,7 @@ img.zoomable:active {
 
 .post-tags {
   text-align: left;
-  margin: 1em 0;
+  margin: 0 0 0.8em 0;
   font-size: 1em;
 }
 
@@ -816,7 +833,9 @@ img.zoomable:active {
 /* 响应式样式 */
 @media (max-width: 768px) {
   main {
-    padding: 70px 1em 60px 1em;
+    padding: 70px 1em 70px 1em;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   .index-card {
@@ -878,7 +897,9 @@ img.zoomable:active {
   }
 
   main {
-    padding: 110px 1em 50px 1em;
+    padding: 110px 1em 70px 1em;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   .search-popup {
@@ -905,5 +926,8 @@ img.zoomable:active {
 
   .terms-list {
     grid-template-columns: 1fr;
+  }
+  .mobile-hidden { 
+    display: none; 
   }
 }
