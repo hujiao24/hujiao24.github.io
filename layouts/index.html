@@ -30,7 +30,7 @@
           {{ $cover = "/images/thumbnail/default.jpg" }}
         {{ end }}
       {{ end }}
-      <img src="{{ $cover | relURL }}" alt="缩略图" class="index-thumbnail object-cover aspect-[16/9] w-full h-auto rounded" loading="lazy">
+      <img src="{{ $cover | relURL }}" alt="缩略图" class="index-thumbnail object-cover aspect-[16/9] w-full h-auto rounded mobile-hidden" loading="lazy">
     </a>
   {{ end }}
 </div>

@@ -183,7 +183,8 @@ nav ul li a:hover {
 }
 
 main {
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 10px auto 0 auto;
   padding: 80px 1em 60px 1em;
   flex: 1;
@@ -760,7 +761,8 @@ img.zoomable:active {
 
 /* terms.html 样式 */
 .terms-container {
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   margin: 1rem auto;
   padding: 0 1em;
 }
@@ -847,6 +849,10 @@ img.zoomable:active {
 
   .terms-list {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .mobile-hidden { 
+    display: none; 
   }
 }
 
