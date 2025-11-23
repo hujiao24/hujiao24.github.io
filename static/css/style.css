@@ -58,7 +58,7 @@ header {
   padding: 0.5em 0;
   z-index: 999;
   box-shadow: var(--shadow);
-  height: 60px;
+  height: 65px;
   transition: all 0.3s ease;
 }
 
@@ -186,7 +186,7 @@ main {
   width: 100%;
   max-width: 1200px;
   margin: 10px auto 0 auto;
-  padding: 80px 1em 60px 1em;
+  padding: 85px 1em 60px 1em;
   flex: 1;
 }
 
@@ -858,13 +858,17 @@ img.zoomable:active {
 
 @media (max-width: 480px) {
   header {
-    height: 50px;
+    height: 110px;
   }
 
   .header-container {
     flex-direction: column;
     align-items: flex-start;
     padding: 0.5em 1em;
+  }
+
+  .index-list {
+    padding: 20px 0;
   }
 
   nav ul {
@@ -874,7 +878,7 @@ img.zoomable:active {
   }
 
   main {
-    padding: 60px 1em 50px 1em;
+    padding: 110px 1em 50px 1em;
   }
 
   .search-popup {
