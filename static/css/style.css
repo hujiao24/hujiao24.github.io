@@ -633,8 +633,8 @@ code {
 }
 
 .content p code {
-  background: var(--code-bg);
-  color: var(--primary-color);
+  background-color: #fff5f5;
+  color: #ff502c;
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-size: 0.95em;
@@ -656,6 +656,11 @@ code {
   height: auto;
   display: block;
   border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin: 12px 0;
+  padding: 4px;
+  background-color: #fafafa;
 }
 
 .content a {

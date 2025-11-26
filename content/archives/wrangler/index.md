@@ -25,7 +25,7 @@ title: 使用wrangler发布workers项目
 
 wrangler 是 cf 发布的一个 nodejs 组件包，在本地使用下面命令安装
 
-```
+```shell
 npm install -g wrangler
 ```
 

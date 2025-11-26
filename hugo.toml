@@ -38,3 +38,8 @@ defaultContentLanguage = "zh"
     name = "关于"
     url = "/about/"
     weight = 7
+
+[markup]
+  [markup.highlight]
+    style = "solarized-dark"
+    noClasses = true
