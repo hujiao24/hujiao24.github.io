@@ -43,3 +43,7 @@ defaultContentLanguage = "zh"
   [markup.highlight]
     style = "solarized-dark"
     noClasses = true
+
+[outputs]
+    home = ["HTML", "RSS", "JSON"]
+

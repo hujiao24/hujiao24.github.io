@@ -129,7 +129,7 @@ terms.html 也可以没有，那么就请求 `分类` 和 `标签` 列表页面�
 
 ![20250711201102](/archives/hugo-build-blog/x9cosk.png)
 
-本地运行正常后，就可以进行打包到 github 进行发布了，在 github 新建一个以用户名命令的仓库，如 `xqc7com.github.io`
+本地运行正常后，就可以进行打包到 github 进行发布了，在 github 新建一个以用户名命令的仓库，如 `hujiao24.github.io`
 
 其他如 blog 等名字的仓库名也是可以的，不过资源路径需要在原来的基础上加 blog 前缀，不然会提示样式加载失败
 
@@ -143,9 +143,9 @@ Source 选择 Github Actions，这样就会通过本仓库中的 .github\workflo
 
 ![20250712094812](/archives/hugo-build-blog/foikc1.png)
 
-在指定 `Github Actions` 后，每次 push 的时候，就会触发自动构建，默认会使用仓库名如 `https://xqc7com.github.io` 进行访问
+在指定 `Github Actions` 后，每次 push 的时候，就会触发自动构建，默认会使用仓库名如 `https://hujiao24.github.io` 进行访问
 
-如果自定义了其他的仓库名如 blog，那么访问路径就是 `https://xqc7com.github.io/blog`
+如果自定义了其他的仓库名如 blog，那么访问路径就是 `https://hujiao24.github.io/blog`
 
 ## 域名配置
 

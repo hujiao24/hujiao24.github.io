@@ -9,6 +9,7 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preload" href="/images/bg1.jpg" as="image">
   <link rel="stylesheet" href="/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 </head>
 <body>
   <header>
@@ -51,24 +52,11 @@
       <div id="search-popup" class="search-popup">
         <div class="search-header">
           <h3 class="search-title">站内搜索</h3>
-          <p class="search-subtitle">选择搜索引擎，输入关键词开始搜索</p>
         </div>
         <div class="search-input-container">
           <input type="text" id="search-input" placeholder="输入关键词..." autocomplete="off" />
         </div>
-        <div class="search-engines">
-          <div class="search-engine active" data-engine="google">Google</div>
-          <div class="search-engine" data-engine="bing">Bing</div>
-          <div class="search-engine" data-engine="yahoo">Yahoo</div>
-          <div class="search-engine" data-engine="baidu">百度</div>
-        </div>
-        <div class="search-actions">
-          <button class="search-btn search-btn-secondary" onclick="closeSearch()">取消</button>
-          <button class="search-btn search-btn-primary" onclick="performSearch()">搜索</button>
-        </div>
-        <div class="search-tips">
-          💡 小贴士：选择不同的搜索引擎可能会得到不同的搜索结果
-        </div>
+        <div id="search-results" class="search-results"></div>
       </div>
     </div>
   </header>

@@ -1,0 +1,13 @@
+{{- $pages := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- $summary := .Summary | plainify | truncate 350 "…" -}}
+  {{- $content := .Plain | plainify -}}
+  {{- $page := dict 
+      "title" .Title 
+      "url" .Permalink 
+      "summary" $summary 
+      "content" $content
+  -}}
+  {{- $pages = $pages | append $page -}}
+{{- end -}}
+{{- $pages | jsonify -}}

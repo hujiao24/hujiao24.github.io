@@ -10,7 +10,7 @@ tags:
 - nvm
 - nodejs
 title: nodejs的版本管理工具NVM
-cover: /archives/nodejs-nvm/ppba9v.png
+cover: /archives/nodejs-nvm/2b0k9a.png
 ---
 
 NVM 是一个 node 的版本管理工具， windows 版本的 [下载地址](https://github.com/coreybutler/nvm-windows/releases/download/1.2.2/nvm-setup.exe)，下载完毕后双击安装

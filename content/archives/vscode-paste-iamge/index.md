@@ -18,7 +18,7 @@ cover: /archives/vscode-paste-iamge/5kncyx.png
 
 在迁移到 hugo 后，图片不再需要保存到图床上，直接保存在 md 文件的当前目录下即可，基于 hugo 的配置，完整路径为 `/archives/xxx/phndmy.png` 这种格式
 
-其中 xxx 为当前 md 文件的目录，`phndmy` 为图片的随机名称，在 vscode 中本身也支持 `ctrl + v` 粘贴剪切板中的图片，但是并不支持这种自定义路径和随机文件名
+其中 xxx 为当前 md 文件的目录，`phndmy` 为图片的随机名称，在 vscode 中本身也支持 `ctrl + v` 粘贴剪切板中的图片，但并不支持这种自定义路径和随机文件名
 
 
 ## PasteImage插件

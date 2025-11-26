@@ -1,116 +1,131 @@
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('search.js loaded'); // 调试日志：确认脚本加载
+document.addEventListener("DOMContentLoaded", async () => {
 
-  const searchButton = document.querySelector('.search-button');
-  const searchOverlay = document.querySelector('.search-overlay');
-  const searchPopup = document.querySelector('.search-popup');
-  const searchInput = document.querySelector('#search-input');
-  const searchEngines = document.querySelectorAll('.search-engine');
-  const siteDomain = window.location.hostname || 'example.com'; // 提供默认域名以防万一
+  const searchButton = document.querySelector(".search-button"); 
+  const searchOverlay = document.querySelector(".search-overlay");
+  const searchPopup = document.querySelector(".search-popup");
+  const searchInput = document.querySelector("#search-input");
+  const resultBox = document.querySelector("#search-results");
 
-  const engines = {
-    google: { name: 'Google', url: 'https://www.google.com/search?q=', siteQuery: `site:${siteDomain} ` },
-    bing: { name: 'Bing', url: 'https://www.bing.com/search?q=', siteQuery: `site:${siteDomain} ` },
-    yahoo: { name: '雅虎', url: 'https://search.yahoo.com/search?p=', siteQuery: `site:${siteDomain} ` },
-    baidu: { name: '百度', url: 'https://www.baidu.com/s?wd=', siteQuery: `site:${siteDomain} ` }
-  };
-
-  let currentEngine = 'google';
+  let fuse = null;
 
   function openSearch() {
-    console.log('openSearch called'); // 调试日志：确认函数调用
     if (searchOverlay && searchPopup) {
-      searchOverlay.style.display = 'flex';
-      searchOverlay.classList.add('show');
+      searchOverlay.style.display = "flex";
+      searchOverlay.classList.add("show");
       if (searchInput) {
-        searchInput.value = '';
+        searchInput.value = "";
         searchInput.focus();
+        resultBox.innerHTML = "";
       }
-    } else {
-      console.error('searchOverlay or searchPopup not found');
     }
   }
 
-  window.closeSearch = function() {
-    console.log('closeSearch called'); // 调试日志
+  async function loadIndex() {
+    try {
+      const res = await fetch("/index.json");
+      const data = await res.json();
+
+      fuse = new Fuse(data, {
+        keys: ["title", "summary", "content"],
+        includeMatches: true,
+        threshold: 0.1,
+        ignoreLocation: true,
+        useExtendedSearch: true
+      });
+      console.log("搜索索引加载完成，共 " + data.length + " 篇文章");
+    } catch (err) {
+      console.error("搜索索引加载失败:", err);
+    }
+  }
+
+  function doSearch(keyword) {
+    if (!keyword.trim()) {
+      resultBox.innerHTML = "";
+      return;
+    }
+
+    const candidates  = fuse.search(keyword);
+    const results = candidates.filter(r => {
+        const t = (r.item.title || "").toLowerCase();
+        const s = (r.item.summary || "").toLowerCase();
+        const c = (r.item.content || "").toLowerCase();
+        return t.includes(keyword) || s.includes(keyword) || c.includes(keyword);
+    });
+
+    if (results.length === 0) {
+      resultBox.innerHTML = "<p>无搜索结果</p>";
+      return;
+    }
+
+    let html = "";
+    console.log("keyword:", keyword, "results:", results.length);
+    results.forEach((r) => {
+      html += `
+        <div class="search-item">
+            <h4><a href="${r.item.url}">${r.item.title}</a></h4>
+            <p>${r.item.summary}</p>
+        </div>`;
+    });
+
+    resultBox.innerHTML = html;
+  }
+
+  window.closeSearch = function () {
     if (searchOverlay) {
-      searchOverlay.classList.remove('show');
+      searchOverlay.classList.remove("show");
       setTimeout(() => {
-        searchOverlay.style.display = 'none';
-      }, 300);
-      if (searchInput) searchInput.value = '';
+        searchOverlay.style.display = "none";
+      }, 100);
+      if (searchInput) searchInput.value = "";
+      if (resultBox) resultBox.innerHTML = "";
     }
   };
 
-  window.performSearch = function() {
-    console.log('performSearch called'); // 调试日志
-    if (!searchInput) {
-      console.error('searchInput not found');
-      return;
-    }
-    const keyword = searchInput.value.trim();
-    if (!keyword) {
-      alert('请输入搜索关键词！');
-      return;
-    }
-    const engine = engines[currentEngine];
-    const query = engine.siteQuery + keyword;
-    const url = engine.url + encodeURIComponent(query);
-    window.open(url, '_blank');
-    closeSearch();
+  window.performSearch = function () {
+    doSearch(searchInput.value);
   };
+
+  await loadIndex();
+
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      doSearch(searchInput.value);
+    });
+
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        doSearch(searchInput.value);
+      }
+    });
+  }
 
   if (searchButton) {
-    searchButton.addEventListener('click', (e) => {
-      console.log('Search button clicked'); // 调试日志
+    searchButton.addEventListener("click", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (searchOverlay.style.display === 'flex') {
+      if (searchOverlay.style.display === "flex") {
         closeSearch();
       } else {
         openSearch();
       }
     });
-  } else {
-    console.error('searchButton not found');
   }
 
   if (searchOverlay) {
-    searchOverlay.addEventListener('click', (e) => {
+    searchOverlay.addEventListener("click", (e) => {
       if (e.target === searchOverlay) closeSearch();
     });
   }
 
   if (searchPopup) {
-    searchPopup.addEventListener('click', (e) => e.stopPropagation());
+    searchPopup.addEventListener("click", (e) => e.stopPropagation());
   }
 
-  if (searchEngines) {
-    searchEngines.forEach(engine => {
-      engine.addEventListener('click', () => {
-        console.log(`Engine selected: ${engine.dataset.engine}`); // 调试日志
-        searchEngines.forEach(e => e.classList.remove('active'));
-        engine.classList.add('active');
-        currentEngine = engine.dataset.engine;
-      });
-    });
-  }
-
-  if (searchInput) {
-    searchInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        performSearch();
-      }
-    });
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (searchOverlay && searchOverlay.style.display === 'flex') {
-      if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (searchOverlay && searchOverlay.style.display === "flex") {
+      if (e.key === "Escape") {
         closeSearch();
-      } else if (e.key === 'Enter') {
-        performSearch();
       }
     }
   });
