@@ -2,11 +2,16 @@
 {{- range .Site.RegularPages -}}
   {{- $summary := .Summary | plainify | truncate 350 "…" -}}
   {{- $content := .Plain | plainify -}}
+  {{- $date := "" -}}
+  {{- if .Date -}}
+    {{- $date = .Date.Format "2006-01-02T15:04:05Z07:00" -}}
+  {{- end -}}
   {{- $page := dict 
       "title" .Title 
       "url" .Permalink 
       "summary" $summary 
       "content" $content
+      "date" $date
   -}}
   {{- $pages = $pages | append $page -}}
 {{- end -}}

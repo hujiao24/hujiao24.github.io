@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
 
       fuse = new Fuse(data, {
-        keys: ["title", "summary", "content"],
+        keys: ["title", "summary", "content", "date"],
         includeMatches: true,
         threshold: 0.1,
         ignoreLocation: true,
@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       resultBox.innerHTML = "<p>无搜索结果</p>";
       return;
     }
+
+    results.sort((a, b) => new Date(b.item.date) - new Date(a.item.date));
 
     let html = "";
     console.log("keyword:", keyword, "results:", results.length);
