@@ -8,7 +8,7 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="preload" href="/images/bg1.jpg" as="image">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ (resources.Get "css/style.css" | minify | fingerprint "md5").RelPermalink }}">
   <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 </head>
 <body>
@@ -85,17 +85,17 @@
         </svg>
       </a>
     </p>
-    <script>
-      (function() {
-        const sinceDate = new Date("{{ .Site.Params.since }}T00:00:00");
-        const now = new Date();
-        const diffTime = now - sinceDate;
-        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        document.getElementById("running-days").textContent = `已累计运行 ${diffDays} 天`;
-      })();
-    </script>
-    <script src="/js/search.js"></script>
-    <script src="/js/theme.js"></script>
   </footer>
+  <script>
+    (function() {
+      const sinceDate = new Date("{{ .Site.Params.since }}T00:00:00");
+      const now = new Date();
+      const diffTime = now - sinceDate;
+      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("running-days").textContent = `已累计运行 ${diffDays} 天`;
+    })();
+  </script>
+  <script src="{{ (resources.Get "js/search.js" | minify | fingerprint "md5").RelPermalink }}"></script>
+  <script src="{{ (resources.Get "js/theme.js" | minify | fingerprint "md5").RelPermalink }}"></script>
 </body>
 </html>
