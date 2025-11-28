@@ -94,6 +94,22 @@
       const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
       document.getElementById("running-days").textContent = `已累计运行 ${diffDays} 天`;
     })();
+    document.addEventListener("DOMContentLoaded", function() {
+        document.querySelectorAll('.content img').forEach(img => {
+            img.onload = () => classify(img);
+            if (img.complete) classify(img);
+        });
+        function classify(img) {
+            const w = img.naturalWidth;
+            const h = img.naturalHeight;
+            img.classList.remove('size-scale','size-portrait');
+            if (h > w) {
+                img.classList.add('size-portrait');
+            } else {
+                img.classList.add('size-scale');
+            }
+        }
+    });
   </script>
   <script src="{{ (resources.Get "js/search.js" | minify | fingerprint "md5").RelPermalink }}"></script>
   <script src="{{ (resources.Get "js/theme.js" | minify | fingerprint "md5").RelPermalink }}"></script>

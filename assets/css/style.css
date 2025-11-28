@@ -710,15 +710,22 @@ code {
 }
 
 .content img {
-  width: 100%;
   height: auto;
   display: block;
   border-radius: 8px;
   border: 1px solid #eee;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin: 12px 0;
+  margin: 12px auto;
   padding: 4px;
   background-color: #fafafa;
+}
+
+.content img.size-scale {
+    width: 75%;
+}
+
+.content img.size-portrait {
+    width: auto;
 }
 
 .content a {
@@ -902,6 +909,10 @@ img.zoomable:active {
     width: 100%;
   }
 
+  .content img.size-scale {
+    width: 100%;
+  }
+
   .index-card {
     flex-direction: column;
     align-items: flex-start;
@@ -963,6 +974,10 @@ img.zoomable:active {
   main {
     padding: 110px 1em 70px 1em;
     box-sizing: border-box;
+    width: 100%;
+  }
+
+  .content img.size-scale {
     width: 100%;
   }
 
