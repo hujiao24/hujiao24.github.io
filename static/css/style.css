@@ -12,6 +12,7 @@
   --code-bg: #f0f4ff;
   --pre-bg: #2e3440;
   --pre-text: #d8dee9;
+  --smallcode-background-color: #fff5f5;
 }
 
 /* 暗色模式变量 */
@@ -28,6 +29,7 @@
   --code-bg: #404040;
   --pre-bg: #1e1e1e;
   --pre-text: #e4e4e4;
+  --smallcode-background-color: #363636;
 }
 
 html {
@@ -285,6 +287,11 @@ footer a:hover {
     overflow-y: auto;
     margin-top: 10px;
     padding-right: 5px;
+}
+
+.search-results * {
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .search-results::-webkit-scrollbar {
@@ -684,7 +691,7 @@ code {
 }
 
 .content p code {
-  background-color: #fff5f5;
+  background-color: var(--smallcode-background-color);
   color: #ff502c;
   padding: 0.2em 0.4em;
   border-radius: 4px;

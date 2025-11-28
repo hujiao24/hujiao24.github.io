@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       searchOverlay.classList.remove("show");
       setTimeout(() => {
         searchOverlay.style.display = "none";
-      }, 100);
+      }, 150);
       if (searchInput) searchInput.value = "";
       if (resultBox) resultBox.innerHTML = "";
     }
@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (searchOverlay) {
     searchOverlay.addEventListener("click", (e) => {
-      if (e.target === searchOverlay) closeSearch();
+      //if (e.target === searchOverlay) closeSearch();
     });
   }
 

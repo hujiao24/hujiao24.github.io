@@ -2,6 +2,7 @@ baseURL = "https://blog.qc7.org/"
 languageCode = "zh-cn"
 title = "胡焦24"
 defaultContentLanguage = "zh"
+enableRobotsTXT = true
 
 [params]
   author = "hujiao24"
