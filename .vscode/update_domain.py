@@ -1,7 +1,7 @@
 import re
 import sys
 
-DOMAIN = "https://blog.qc7.org/"
+DOMAIN = "https://blog.qc7.org"
 
 def process_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as f:
