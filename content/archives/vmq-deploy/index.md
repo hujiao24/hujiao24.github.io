@@ -6,7 +6,7 @@ description: ''
 draft: false
 image: ''
 slug: vmq-deploy
-cover: /archives/vmq-deploy/zehun1.png
+cover: /archives/vmq-deploy/r18lqd.png
 tags:
 - vmq
 - 安卓开发
@@ -160,3 +160,24 @@ pause
 ![](/archives/vmq-deploy/y19j1r.png)
 
 
+## 模拟器部署
+
+这里的模拟器是指在 android studio 中进行安装的模拟器 `Medium Phone`，其他类型的模拟器可能有所不同
+
+### 网络配置
+
+空白处下滑，然后点击 internet，在弹出的窗口中启用 T-Mobile
+
+![](/archives/vmq-deploy/exdz0f.png)
+
+### 应用卸载
+
+空白处上滑，显示安装的 app 应用列表，点击支付应用3秒钟，弹出应用的菜单，点击 “app info”，在显示的应用页面上点击 “uninstall” 进行卸载应用
+
+![](/archives/vmq-deploy/vxbn2r.png)
+
+### 通知配置
+
+在 “app info” 页面上，点击 “Notifications” ，在新的页面上进行授权 notification
+
+![](/archives/vmq-deploy/z7fuej.png)
