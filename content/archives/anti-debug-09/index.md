@@ -80,9 +80,9 @@ if ((end - start) > 100)
 
 为简化代码，这里不使用网络请求获取的 hash 值，而是将 hash 计算后写入到本地 txt 文件中，然后在程序中读取 txt 的文本中的 hash 值
 
-在实际部署的时候，还需要对不同发布版本的 hash 值进行维护，另外 hash 计算使用 [这里](http://www.zedwood.com/article/cpp-md5-function) 提供的 md5 封装实现，只需将对应的 md5.h 和 md5.cpp 直接引入到工程即可
+在实际部署的时候，还需要对不同发布版本的 hash 值进行维护，下面 hash 计算使用 [这里](http://www.zedwood.com/article/cpp-md5-function) 提供的实现，只需将 md5.h 和 md5.cpp 引入到工程即可
 
-完整的反调代码实现如下 
+完整的业务代码实现如下 
 
 ```c++
 #include <iostream>
