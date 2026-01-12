@@ -30,9 +30,9 @@ title: 将namesilo上的域名快速迁移到cloudflare中
 
 ![](/archives/domain-transfer/aqa0os.png)
 
-因此，考虑将域名迁移到 cloudflare 中，域名迁移是不会产生任何费用的，cloudflare 上显示的费用只会在需要续费的时候才会扣除
+因此，考虑将域名迁移到 cloudflare 中，域名迁移是不会产生其他额外费用的，cloudflare 上显示的费用是域名一年的续费金额
 
-你也可以关闭自动续费，然后在域名到期后，自己进行手动续费
+在转移到 cloudflare 的时候进行收取，转移后你也可以关闭自动续费，然后在下一次域名到期后，自己进行手动续费
 
 ## 域名迁移
 
