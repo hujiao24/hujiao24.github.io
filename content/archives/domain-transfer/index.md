@@ -24,7 +24,7 @@ title: 将namesilo上的域名快速迁移到cloudflare中
 
 3、费用问题，除了域名新注册有时候可能有优惠会便宜一点，续费价格一般都比 cloudflare 贵
 
-比如，在 namesilo 上续费价格为 9.9 美元，但是 cloudflare 不加价、按注册局费用收取，不收额外利润或隐藏费，续费价格能便宜 2 美元
+比如，在 namesilo 上续费价格为 9.99 美元，但是 cloudflare 不加价、按注册局费用收取，不收额外利润或隐藏费，续费价格能便宜 1.99 美元
 
 ![](/archives/domain-transfer/dnyelg.png)
 

@@ -45,4 +45,99 @@ contains invalid UTF-8
 
 ![](/archives/memos-trouble/592jo1.png)
 
-粗略看了下代码，也看不出来哪里的问题，测试了多次发现 utf8 错误是换行导致的，只好先使用 `<br>` 进行写入，先适应一段时间看能否投入使用吧
+## 修复补充
+
+仔细分析了下 memos 项目的代码实现，发生 uft8 错误并不是因为换行的原因，只不过我在本地测试的时候多了个换行符导致长度变动了
+
+实际问题是在 ListMemos 查询的时候进行 GenerateSnippet 处理，会对原始的 memo 记录进行了截取，在遇到中文的时候，这一截可能就出问题了
+
+原始代码并不是按 rune 进行截取的，是按 byte 进行了处理，然后就导致问题产生，数据写进去了，但是查询出来截取了半个中文，然后就出问题了
+
+修改代码如下，windows 编译的版本提交到了 `https://download.csdn.net/download/weixin_53109623/92555947`
+
+```diff
+diff --git a/plugin/markdown/markdown.go b/plugin/markdown/markdown.go
+index c6498beb..6570bde4 100644
+--- a/plugin/markdown/markdown.go
++++ b/plugin/markdown/markdown.go
+@@ -3,6 +3,7 @@ package markdown
+ import (
+        "bytes"
+        "strings"
++       "unicode/utf8"
+
+        "github.com/yuin/goldmark"
+        gast "github.com/yuin/goldmark/ast"
+@@ -209,6 +210,7 @@ func (s *service) GenerateSnippet(content []byte, maxLength int) (string, error)
+
+        var buf strings.Builder
+        var lastNodeWasBlock bool
++       var runeCount int
+
+        err = gast.Walk(root, func(n gast.Node, entering bool) (gast.WalkStatus, error) {
+                if entering {
+@@ -225,6 +227,7 @@ func (s *service) GenerateSnippet(content []byte, maxLength int) (string, error)
+                        case gast.KindParagraph, gast.KindHeading, gast.KindListItem:
+                                if buf.Len() > 0 && lastNodeWasBlock {
+                                        buf.WriteByte(' ')
++                                       runeCount++
+                                }
+                        default:
+                                // No space needed for other node types
+@@ -246,18 +249,20 @@ func (s *service) GenerateSnippet(content []byte, maxLength int) (string, error)
+
+                // Only extract plain text nodes
+                if textNode, ok := n.(*gast.Text); ok {
+-                       segment := textNode.Segment
+-                       buf.Write(segment.Value(content))
++                       val := textNode.Segment.Value(content)
++                       buf.Write(val)
++                       runeCount += utf8.RuneCount(val)
+
+                        // Add space if this is a soft line break
+                        if textNode.SoftLineBreak() {
+                                buf.WriteByte(' ')
++                               runeCount++
+                        }
+                }
+
+                // Stop walking if we've exceeded double the max length
+                // (we'll truncate precisely later)
+-               if buf.Len() > maxLength*2 {
++               if runeCount > maxLength*2 {
+                        return gast.WalkStop, nil
+                }
+
+@@ -271,8 +276,8 @@ func (s *service) GenerateSnippet(content []byte, maxLength int) (string, error)
+        snippet := buf.String()
+
+        // Truncate at word boundary if needed
+-       if len(snippet) > maxLength {
+-               snippet = truncateAtWord(snippet, maxLength)
++       if utf8.RuneCountInString(snippet) > maxLength {
++               snippet = truncateRunes(snippet, maxLength)
+        }
+
+        return strings.TrimSpace(snippet), nil
+@@ -405,3 +410,19 @@ func truncateAtWord(s string, maxLength int) string {
+
+        return truncated + " ..."
+ }
++
++// truncateRunes truncates a string at a rune boundary before maxLength.
++func truncateRunes(s string, maxLength int) string {
++       // Rune-safe length check
++       if utf8.RuneCountInString(s) <= maxLength {
++               return s
++       }
++
++       // Convert to rune slice for safe truncation
++       rs := []rune(s)
++
++       // Hard truncate at rune length
++       truncated := string(rs[:maxLength])
++
++       return truncated + " ..."
++}
+```
+
