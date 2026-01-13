@@ -82,6 +82,11 @@ title: 碎片笔记memos的部署和使用
 textarea {
     height: 96px !important;
 }
+
+p {
+    white-space: pre-line;
+}
+
 ```
 
 ![](/archives/memos/xlr0k8.png)
